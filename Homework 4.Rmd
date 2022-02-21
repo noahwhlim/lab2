@@ -52,7 +52,7 @@ hist(choco$Rating,
      xlab = "Rating")
 ```
 
-#### Ans: There seems to be a fairly normal distribution with a slight right skew.   
+#### Ans: The distribution of the ratings are skewed left. There is an outlier where the rating is a 1, and another outlier where the rating is a 5.  
 
 ## 2. Do ratings depend on the cocoa percentage of a chocolate bar?  
 
@@ -73,5 +73,31 @@ ggplot(newChoco, aes(x = Company.Location, y = Rating)) +
   geom_boxplot()
 ```
 
-#### Ans: They all seem to have the same average rating with Canada and US having a larger variation within them.
+#### Ans: They all seem to have the same median rating with Canada and US having a larger variation within them.
   
+## 4. Own Question: What are some statistics about companies in the US?
+
+```{r}
+USChoco <- dplyr::filter(choco, Company.Location %in% c("U.S.A."))
+ggplot(USChoco, aes(x = Rating)) +
+  geom_bar()
+```
+
+The ratings of US companies follow closely to all of the companies. The graph shows a left skew.
+
+```{r}
+ggplot(USChoco, aes(x = Company.Location, y = Rating)) +
+  geom_boxplot()
+```
+
+It appears that the median rating is 3.25 for companies in the US. The max value is 4.0. The minimum rating is 1.5. 50% of the companies in the US fall in between a rating of 2.75 and 3.5.
+
+```{r}
+highest_US_companies = levels(reorder(USChoco$Company, USChoco$Rating))[1:10]
+highest_US_companies
+```
+
+The highest rated US company is Jacque Torres.
+
+## 5. Workflow
+Noah worked on question set 2. Michael did the questions for questions set 1. We both worked on the "own question" part together, and used Michael's computer to push the code for that part. Noah finished his part first, so Michael pulled his code before working on his part. After we completed everything, Michael pushed the final product into the repository.
