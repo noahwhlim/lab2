@@ -3,6 +3,12 @@ title: "Homework 4"
 author: "Wei Hern Lim"
 output: html_document
 ---
+## Team members
+- Michael Mila
+- Wei Hern Lim
+
+## Github link: 
+ https://github.com/noahwhlim/lab2
 
 ```{r}
 library(tidyverse)
