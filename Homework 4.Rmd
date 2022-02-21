@@ -1,0 +1,71 @@
+---
+title: "Homework 4"
+author: "Wei Hern Lim"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+```
+
+## Read data
+```{r}
+choco <- read.csv("https://ds202-at-isu.github.io/labs/data/choco.csv")
+head(choco)
+```
+
+# Question Set I  
+
+## 1. What is the overall number of chocolate bars rated?  
+
+```{r}
+count(choco)
+```
+
+#### Ans: 1852 chocolate bars  
+
+## 2. How does the number of ratings depend on the year? Draw a bar chart of the number of reports.  
+
+```{r}
+choco %>% ggplot(aes(x = as.factor(Review.Date))) +
+  xlab("Review Date") +
+  ylab("Review Count") +
+  geom_bar()
+```
+
+#### Ans: The number of ratings trends upwards from 2006 to 2015 where it starts falling off to about 80 in 2017.  
+
+# Question Set II  
+
+## 1. How are ratings distributed? Draw a histogram of ratings and describe it. Don’t forget to mention outliers, if there are any.  
+
+```{r}
+hist(choco$Rating, 
+     main = "Histogram of Rating", 
+     xlab = "Rating")
+```
+
+#### Ans: There seems to be a fairly normal distribution with a slight right skew.   
+
+## 2. Do ratings depend on the cocoa percentage of a chocolate bar?  
+
+```{r}
+ggplot(choco, aes(x = Cocoa.Pct, y = Rating) ) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+#### Ans: Yes, there seems to be a downward trend in ratings as the percentage of cococa present in a chocolate bar increases.  
+
+## 3. How do ratings compare across different company locations? Focus on the three locations with the most ratings.    
+
+```{r}
+newChoco <- dplyr::filter(choco, Company.Location %in% c("U.S.A.", "France", "Canada"))
+
+ggplot(newChoco, aes(x = Company.Location, y = Rating)) +
+  geom_boxplot()
+```
+
+#### Ans: They all seem to have the same average rating with Canada and US having a larger variation within them.
+  
